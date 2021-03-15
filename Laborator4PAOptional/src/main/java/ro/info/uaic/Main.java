@@ -10,6 +10,7 @@ import java.util.TreeSet;
 public class Main {
     public static void main(String[] args) {
 
+        int[] note;
         Student[] studenti = IntStream.range(0, 4).mapToObj(i -> new Student("s" + i)).toArray(Student[]::new);
         School[] scoli = IntStream.range(0, 3).mapToObj(i -> new School("sh" + i)).toArray(School[]::new);
 
@@ -24,9 +25,9 @@ public class Main {
         /**
          * Dau nume random scolilor
          */
-        scoli[0].setNume(faker.name().bloodGroup());
-        scoli[1].setNume(faker.name().bloodGroup());
-        scoli[2].setNume(faker.name().bloodGroup());
+        scoli[0].setNume(faker.university().name());
+        scoli[1].setNume(faker.university().name());
+        scoli[2].setNume(faker.university().name());
 
 
         /**
@@ -38,7 +39,7 @@ public class Main {
          */
         Collections.sort(listaStudenti, new Compare());
         /**
-         * Setez lista de preferinte pentru fiecare student
+         * Setez lista de preferinte pentru fiecare student + notele studentului
          */
         if (true) {
             List<School> lista = new ArrayList<>();
@@ -57,6 +58,11 @@ public class Main {
             lista.add(scoli[0]);
             lista.add(scoli[2]);
             listaStudenti.get(3).putInListaPreferinte(listaStudenti.get(3), lista);
+
+            listaStudenti.get(0).setNota(10);
+            listaStudenti.get(1).setNota(5);
+            listaStudenti.get(2).setNota(3);
+            listaStudenti.get(3).setNota(7);
         }
 
         /**
@@ -106,6 +112,7 @@ public class Main {
          */
         System.out.println();
         listaScoala.forEach(element -> element.printMap());
+
 
         Problem rezolvare = new Problem();
         rezolvare.setListaScoli(listaScoala);

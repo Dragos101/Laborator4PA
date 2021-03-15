@@ -5,16 +5,22 @@ import com.sun.source.tree.Tree;
 import java.util.*;
 
 public class Problem {
-    List<Student> listaStudenti;
-    TreeSet<School> listaScoli;
-    Map<Student, School> listaFinala;
+    private List<Student> listaStudenti;
+    private TreeSet<School> listaScoli;
+    private int[] note;
 
     Problem() {
         listaStudenti = new LinkedList<>();
         listaScoli = new TreeSet<>();
-        listaFinala = new HashMap<>();
     }
 
+    /**
+     * note este vectorul de note astfel pe pozitia 0 se afla nota pentru studentul de la pozitia 0 din lista listaStudenti
+     * @param note
+     */
+    public void setNote(int[] note){
+        this.note = note;
+    }
     /**
      * getter pentru listaStudenti
      * @return
@@ -49,7 +55,7 @@ public class Problem {
     public void solution(){
         Solution solution = new Solution();
         System.out.println();
-        solution.solutionExample(listaStudenti, listaScoli);
+        solution.solutionInGeneral(listaStudenti, listaScoli);
     }
 
 }

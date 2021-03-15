@@ -10,17 +10,50 @@ public class Student implements Comparable<Student>{
     /**
      * Structura de date care imi permite sa stochez preferintele studentului
      */
-    Map<Student, List<School>> listaPreferinte;
+    private Map<Student, List<School>> listaPreferinte;
+    private int nota, alocat;
 
     Student(){
-        nume = null;
-        listaPreferinte = new TreeMap<Student, List<School>>();
+        this.nota = 0;
+        this.nume = null;
+        this.listaPreferinte = new TreeMap<Student, List<School>>();
+        this.alocat = 0;
     }
     Student(String nume){
+        this.nota = 0;
         this.nume = nume;
         this.listaPreferinte = new TreeMap<Student, List<School>>();
+        this.alocat = 0;
     }
 
+    /**
+     * setter pentru alocat
+     * @param alocat
+     */
+    public void setAlocat(int alocat){
+        this.alocat = alocat;
+    }
+    /**
+     * getter pentru alocat
+     * @return
+     */
+    public int getAlocat(){
+        return alocat;
+    }
+    /**
+     * getter pentru nota
+     * @return
+     */
+    public int getNota(){
+        return nota;
+    }
+    /**
+     * Setter pentru nota student
+     * @param nota
+     */
+    public void setNota(int nota){
+        this.nota = nota;
+    }
     /**
      * Getter pentru listaPreferinta
      * @return
@@ -58,6 +91,19 @@ public class Student implements Comparable<Student>{
                 System.out.print(map.getValue().get(i).getNume() + ", ");
             }
         }
+    }
+
+    /**
+     * verifica daca scoala s se afla in lista de preferinte a studentului
+     * @param s
+     * @return
+     */
+    public int isInList(School s){
+        for(Map.Entry<Student, List<School>> map : listaPreferinte.entrySet())
+            for(int i = 0; i < map.getValue().size(); ++i){
+                if(map.getValue().get(i).getNume().compareTo(s.getNume()) == 0) return 1;
+            }
+        return 0;
     }
 
     public int compareTo(Student s){

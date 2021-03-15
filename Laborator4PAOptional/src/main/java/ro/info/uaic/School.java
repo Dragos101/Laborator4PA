@@ -6,11 +6,11 @@ import java.util.Map;
 
 public class School implements Comparable<School>{
     private String nume;
-    private int capacity;
+    private int capacity, alocat;
     /**
      * Mapa ce reprezinta preferintele scolilor fata de studenti
      */
-    Map<School , List<Student>> listaCandidatiAlocati;
+    private Map<School , List<Student>> listaCandidatiAlocati;
 
     School(){
         this.nume = null;
@@ -20,7 +20,8 @@ public class School implements Comparable<School>{
     School(String nume){
         this.nume = nume;
         this.capacity = 0;
-        listaCandidatiAlocati = new HashMap<School , List<Student>>();
+        this.alocat = 0;
+        this.listaCandidatiAlocati = new HashMap<School , List<Student>>();
     }
 
     /**
@@ -67,6 +68,19 @@ public class School implements Comparable<School>{
                 System.out.print(map.getValue().get(i).getNume() + ", ");
             }
         }
+    }
+
+    /**
+     * verifica daca studentul s se afla in lista de preferinte a liceului
+     * @param s
+     * @return
+     */
+    public int isInList(Student s){
+        for(Map.Entry<School , List<Student>> map : listaCandidatiAlocati.entrySet())
+            for(int i = 0; i < map.getValue().size(); ++i){
+                if(map.getValue().get(i).getNume().compareTo(s.getNume()) == 0) return 1;
+            }
+        return 0;
     }
 
     public int compareTo(School school){
