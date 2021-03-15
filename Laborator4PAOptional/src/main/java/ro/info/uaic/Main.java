@@ -3,6 +3,7 @@ package ro.info.uaic;
 import com.github.javafaker.Faker;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.TreeSet;
 
@@ -102,7 +103,6 @@ public class Main {
          */
         TreeSet<School> listaScoala = new TreeSet<School>(Arrays.asList(scoli));
 
-
         /**
          * Afisare listaPreferinte pentru studenti
          */
@@ -113,12 +113,36 @@ public class Main {
         System.out.println();
         listaScoala.forEach(element -> element.printMap());
 
-
+        /**
+         * rezolv problema
+         */
         Problem rezolvare = new Problem();
         rezolvare.setListaScoli(listaScoala);
         rezolvare.setListaStudenti(listaStudenti);
         rezolvare.solution();
 
+
+        //queries that display the students who find acceptable a given list of schools
+        Map<Student, List<School>> mapaQueries = new HashMap<>();
+        for (Student student : listaStudenti)
+            mapaQueries.put(student, student.getValuesFromMap());
+        List<School> target = Arrays.asList(scoli[0], scoli[2]);
+        List<Student> result = listaStudenti.stream().filter(student -> mapaQueries.get(student).containsAll(target)).collect(Collectors.toList());
+        System.out.println("\nStudentii care accepta scolile de pe pozitiile 0 si 2 sunt: ");
+        for(Student s : result)
+            System.out.println(s.getNume() + " ");
+        System.out.println();
+
+        //queries that display for schools
+        Map<School, List<Student>> mapaQueries2 = new HashMap<>();
+        for(School school: scoli)
+            mapaQueries2.put(school, school.getValuesFromMap());
+        List<Student> target1 = Arrays.asList((listaStudenti.get(3)));
+        List<School> result1 = listaScoala.stream().filter(school -> mapaQueries2.get(school).containsAll(target1)).collect(Collectors.toList());
+        System.out.println("\nScolile care accepta studentul de pe pozitia 3 sunt: ");
+        for(School s : result1)
+            System.out.println(s.getNume());
+        System.out.println();
     }
 }
 

@@ -1,9 +1,6 @@
 package ro.info.uaic;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Student implements Comparable<Student>{
     private String nume;
@@ -92,7 +89,6 @@ public class Student implements Comparable<Student>{
             }
         }
     }
-
     /**
      * verifica daca scoala s se afla in lista de preferinte a studentului
      * @param s
@@ -105,6 +101,13 @@ public class Student implements Comparable<Student>{
             }
         return 0;
     }
+    public List<School> getValuesFromMap(){
+        List<School> students = new LinkedList<>();
+        for(Map.Entry<Student, List<School>> map : listaPreferinte.entrySet())
+            return map.getValue();
+        return students;
+    }
+
 
     public int compareTo(Student s){
         if(nume.compareTo(s.getNume()) == 0) return 0;

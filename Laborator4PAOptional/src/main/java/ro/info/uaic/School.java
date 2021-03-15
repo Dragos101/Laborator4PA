@@ -1,6 +1,7 @@
 package ro.info.uaic;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +70,6 @@ public class School implements Comparable<School>{
             }
         }
     }
-
     /**
      * verifica daca studentul s se afla in lista de preferinte a liceului
      * @param s
@@ -81,6 +81,12 @@ public class School implements Comparable<School>{
                 if(map.getValue().get(i).getNume().compareTo(s.getNume()) == 0) return 1;
             }
         return 0;
+    }
+    public List<Student> getValuesFromMap(){
+        List<Student> students = new LinkedList<>();
+        for(Map.Entry<School, List<Student>> map : listaCandidatiAlocati.entrySet())
+            return map.getValue();
+        return students;
     }
 
     public int compareTo(School school){
